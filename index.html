@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evidence index — Alejandro Pantoja</title>
+<meta name="description" content="Every claim on my profile, and where to check it.">
+<style>
+:root{
+  --bg:#fbfaf8; --fg:#1a1a19; --muted:#6b6a66; --line:#e2e0da;
+  --accent:#1f4d3d; --chip:#eef1ee; --warn:#8a6d1f;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#151614;--fg:#e8e6e1;--muted:#9d9b95;--line:#2e302c;
+        --accent:#8fc7ae;--chip:#20231f;--warn:#d8b95c;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:56px 22px 96px}
+h1{font-size:1.85rem;line-height:1.2;margin:0 0 6px;letter-spacing:-.02em}
+h2{font-size:1.18rem;margin:52px 0 14px;letter-spacing:-.01em;
+   padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:1rem;margin:30px 0 8px}
+p{margin:0 0 15px}
+.sub{color:var(--muted);margin:0 0 30px;font-size:1.02rem}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(127,127,127,.35)}
+a:hover{border-bottom-color:currentColor}
+code{font-family:var(--mono);font-size:.86em;background:var(--chip);
+  padding:1px 5px;border-radius:4px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:520px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+tr:last-child td{border-bottom:none}
+.note{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin:0 0 20px;color:var(--muted)}
+.warnbox{border:1px solid var(--line);border-left:3px solid var(--warn);
+  padding:14px 16px;border-radius:0 6px 6px 0;margin:0 0 20px;font-size:.94rem}
+ul{margin:0 0 15px;padding-left:20px}
+li{margin-bottom:7px}
+.chip{display:inline-block;background:var(--chip);border-radius:999px;
+  padding:2px 9px;font-size:.74rem;letter-spacing:.04em;color:var(--muted);
+  text-transform:uppercase;font-weight:600;white-space:nowrap}
+.foot{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.88rem}
+.kv{font-family:var(--mono);font-size:.85rem;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Evidence index</h1>
+<p class="sub">Alejandro Pantoja — Product Manager, delivery &amp; applied AI.<br>
+Every claim on my profile, and where to check it.</p>
+
+<div class="note">
+<p><strong>Why this page exists.</strong> A profile is a set of assertions. This
+page turns each one into something you can open, run, or disagree with. Where a
+claim cannot be made public, it says so instead of quietly rounding up.</p>
+</div>
+
+<h2>Two bodies of work, kept apart</h2>
+
+<p>They are not interchangeable, and merging them would produce a false claim.</p>
+
+<div class="scroll">
+<table>
+<tr><th></th><th>What it is</th><th>Client</th><th>Status</th></tr>
+<tr>
+  <td><span class="chip">Delivered</span></td>
+  <td><strong>On-prem → AWS migration, ~100 servers</strong>, at an industrial
+      company. Led end to end: scope and assumptions defined, five technical
+      disciplines plus every application owner coordinated, progress/cost/risk
+      reported to global IT leadership.</td>
+  <td>Internal IT, and the engineering teams running on those servers</td>
+  <td>Shipped</td>
+</tr>
+<tr>
+  <td><span class="chip">Independent</span></td>
+  <td><strong>Six AI/agent products</strong> built to answer one question: can
+      you tell whether an AI solution works, what it costs, and when to stop it?</td>
+  <td>None</td>
+  <td>Five closed, one stopped on evidence</td>
+</tr>
+</table>
+</div>
+
+<p>A previous employer is referred to only as <em>an industrial company</em>,
+under an NDA. The migration inventory I retained was sanitised through review
+cycles with the IT teams, which is what makes any of it shareable.</p>
+
+<h2>Claim → evidence</h2>
+
+<div class="scroll">
+<table>
+<tr><th>Claim</th><th>Where to check it</th></tr>
+
+<tr>
+<td>I led a ~100-server on-prem to AWS migration end to end, coordinating five
+technical disciplines and every application owner.</td>
+<td>Not public — an NDA covers it. Verifiable in conversation, and in
+references. What <em>is</em> public is the tool I built afterwards, below.</td>
+</tr>
+
+<tr>
+<td>I built a migration planner and <strong>benchmarked it against that real
+estate</strong> — the documented dependencies held (100 servers, 44/44 resolving,
+0 contract violations, no cycles), and across those 44 the tool's ordering and
+the drawn wave plan disagree on all 44.</td>
+<td><a href="https://github.com/alexPantoja90210/aws-migration-planner">aws-migration-planner</a>
+→ <code>FINDINGS-100-servers.md</code>. Run it:
+<code>python planner.py --inventory inventory/servers-100.json</code></td>
+</tr>
+
+<tr>
+<td>A read-only IAM role that denies everything outside an enumerated read set,
+<strong>proven from inside the account</strong>: 11/11 mutations denied, 0
+inconclusive, 5/5 reads working.</td>
+<td><a href="https://github.com/alexPantoja90210/aws-finops-guardian">aws-finops-guardian</a>
+→ <code>infra/main.tf</code> for the <code>NotAction</code> policy,
+<code>infra/verify_readonly.sh</code> for the runtime check</td>
+</tr>
+
+<tr>
+<td>Agents that read real cloud data and cannot change it, behind an eval gate
+with negative tests that must go red.</td>
+<td><a href="https://github.com/alexPantoja90210/agentic-copilots">agentic-copilots</a>
+→ <code>evals.py --selftest</code> in each project</td>
+</tr>
+
+<tr>
+<td>An agent reproduced <strong>11 of 13</strong> objective questions from a
+validated analyst deliverable, against a threshold frozen and committed
+<em>before</em> the first API call. 930,510 tokens, 12.8 minutes, 97,498 tickets.</td>
+<td>Not public. The corpus is third-party. Run records and the pre-registration
+commit available on request.</td>
+</tr>
+
+<tr>
+<td>I <strong>stopped a pilot</strong> without shipping it, on evidence: no
+incident in the corpus required the dependency graph, so the pilot could not test
+the hypothesis it existed to test.</td>
+<td>Recorded as the project's outcome, not as a silence. Detail on request.</td>
+</tr>
+
+<tr>
+<td>25 defects raised and tracked, most of them found in my own instruments
+before they could reach a published conclusion.</td>
+<td>Private register. The pattern is the interesting part — see below.</td>
+</tr>
+</table>
+</div>
+
+<h2>The pattern I actually care about</h2>
+
+<p>In five of the six builds, <strong>the most expensive defect was never in the
+model. It was in the thing measuring the model, or in the thing describing
+it.</strong></p>
+
+<p>One shape recurs: <em>a description that does not match what it describes.</em></p>
+
+<ul>
+<li>Two hand-maintained permission lists that had to agree, and drifted.</li>
+<li>An IAM policy describing itself as denying <em>every</em> mutation while
+naming thirteen.</li>
+<li>A cost figure called <em>“the target cost”</em> that is the target cost
+<strong>at list price</strong> — and a <code>verified: true</code> flag
+certifying <em>transcription</em> while being read as certifying
+<em>applicability</em>.</li>
+<li>A note about one flattened spreadsheet, written in language that read as a
+verdict on an organisation's data discipline.</li>
+</ul>
+
+<p>The last two ran <strong>against my own interest</strong> — one overstated a
+figure I was about to publish, the other understated work I had actually
+delivered. Both were raised as defects and corrected in the open rather than
+edited away.</p>
+
+<p><strong>Two rules came out of it:</strong> a flag must say what it verified,
+and a finding must name the artifact it was found in. A true statement about a
+file can be a false statement about the world the file came from, and no
+fact-check catches that.</p>
+
+<h2>What I do not claim</h2>
+
+<div class="warnbox">
+<p>Stated here so nobody has to discover it.</p>
+<ul>
+<li><strong>No USD figure for LLM cost.</strong> That price file is
+<code>verified: false</code>. Token counts are publishable; dollars are not.</li>
+<li><strong>The migration cost figure is a list-price upper bound, not a
+costing.</strong> Any organisation running an estate that size pays negotiated
+rates, lower by an amount I do not know and <strong>will not estimate</strong>.</li>
+<li><strong>No saving is claimed</strong> from the planner. It computes the cost
+of a target, not a delta.</li>
+<li><strong>No conclusion about that migration's source records.</strong> What I
+retained is a sanitised, flattened extract. The dependency mapping lived in a
+system of record I no longer have access to, and nothing here is a statement
+about it.</li>
+<li><strong>No error attributed to the delivered migration.</strong> The wave
+plan drawn at the time encodes blast radius, team availability and change
+windows — none of which exist in an inventory, and all of which the tool is
+blind to.</li>
+<li><strong>No comparison against human analyst hours.</strong> The reference
+project never recorded how long the person took. It is the comparison everyone
+wants and the one that does not exist.</li>
+<li><strong>None of the six AI builds was deployed to a user other than
+me</strong>, and no before/after of anyone's work was measured. They answer
+<em>“can you evaluate an AI solution honestly?”</em> — not <em>“what have you
+shipped to production?”</em> The migration above answers that one, and is
+separate.</li>
+</ul>
+</div>
+
+<h2>How the work is run</h2>
+
+<p>Three standing rules, and they are load-bearing rather than decorative:</p>
+
+<ul>
+<li><strong>Nothing exists if it is not in the tracker.</strong></li>
+<li><strong>Every defect is raised as a defect</strong>, even when it is fixed on
+the spot — including the ones that make my own earlier claims look worse.</li>
+<li><strong>Nothing exists if it is not in version control</strong>, with the
+hash on the issue before anything is called done.</li>
+</ul>
+
+<p>Delivery artifacts — roadmap, RAID register, decision log with trade-offs,
+definition of ready and done, BPMN flows — exist for the portfolio and can be
+walked through in an interview. They are not published because a personal
+tracker full of half-context is worse evidence than a conversation.</p>
+
+<div class="foot">
+<p><span class="kv">Public repos:</span>
+<a href="https://github.com/alexPantoja90210/aws-migration-planner">aws-migration-planner</a> ·
+<a href="https://github.com/alexPantoja90210/aws-finops-guardian">aws-finops-guardian</a> ·
+<a href="https://github.com/alexPantoja90210/agentic-copilots">agentic-copilots</a></p>
+<p>If something here does not check out, tell me and I will correct it. That has
+happened repeatedly and it is the point.</p>
+</div>
+
+</div>
+</body>
+</html>
