@@ -295,8 +295,20 @@ negative tests that must go red.</td>
 <td>An agent reproduced <strong>11 of 13</strong> objective questions from a
 validated analyst deliverable, against a threshold frozen and committed
 <em>before</em> the first API call. 930,510 tokens, 12.8 minutes, 97,498 tickets.</td>
-<td>Not public — the corpus is third-party. Run records and the pre-registration
-commit available on request.</td>
+<td><strong>Reproducible end to end, and none of it is mine to take credit for
+twice.</strong><br>
+<a href="https://github.com/alexPantoja90210/agentic-copilots/blob/main/analyst/PREREGISTRATION.md">analyst/PREREGISTRATION.md</a>
+was written before the run and <strong>bound to it</strong>: the runner writes this
+file's commit hash into <code>run_config.json</code>, so <strong>a run whose config
+carries a hash that is not an ancestor of the reported results is not
+scored.</strong> The scorer, the harness and six selftests are in
+<a href="https://github.com/alexPantoja90210/agentic-copilots/tree/main/analyst"><code>analyst/</code></a>.<br>
+The human deliverable I benchmarked against is
+<a href="https://github.com/febx1/IT-Ticket-Management-Excel-Project">another
+analyst's public project</a> — the dataset, the question set and the dashboard are
+theirs. <strong>Linked, never copied:</strong> that repository carries no licence,
+so linking is the only correct treatment. Fetch it from the source and my harness
+runs against the same input.</td>
 </tr>
 </table>
 </div>
