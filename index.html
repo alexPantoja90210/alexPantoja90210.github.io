@@ -156,17 +156,46 @@ caught metric evidence emitted as free text, before delivery</td>
 
 <tr>
 <td><strong>Migration Planner</strong></td>
-<td>What moves, in what order, and what will it cost? And what do you compare a
-planning tool against?</td>
-<td><strong>Closed.</strong> Benchmarked against a real 100-server estate and the
-four-wave plan five IT teams drew for it</td>
+<td>What moves, in what order, and what will it cost?<br>
+<strong>Benchmarked against a real 100-server estate and the four-wave plan five
+IT teams drew for it.</strong> Most planning tools never get a benchmark — they
+run on a fixture built to agree with them. This one was run against an estate I
+migrated at GE and against a plan made by people who had context the tool does not
+model.<br>
+<strong>Not a verdict on the human plan.</strong> Those four waves carry blast
+radius, team availability, change windows and internal policy, and none of that
+exists in an inventory. <strong>Neither ordering is complete alone:</strong>
+people keep owning the schedule; a machine checks the invariant before anyone
+signs.</td>
+<td><strong>Closed.</strong> The documented dependencies <strong>held</strong> —
+100 servers, <strong>0 contract violations, no cycles, 44 of 44 resolving</strong>
+under a check built to break them.<br>
+Then the two orderings disagreed on <strong>all 44</strong>: the drawn plan uses
+four waves, the documented dependencies support two. They optimise different
+things, and that is the finding.<br>
+<strong>It plans; it does not move data.</strong> The cost figure is the target
+at public list prices — a ceiling, not a costing, and <strong>no saving is
+claimed.</strong></td>
 </tr>
 
 <tr>
 <td><strong>Agent-as-analyst</strong></td>
-<td>Can an agent reproduce an analyst deliverable, and at what cost?</td>
-<td><strong>Closed.</strong> 11 of 13 objective questions, against a threshold
-frozen and committed before the first API call, with zero invented figures</td>
+<td>Can an agent reproduce an analyst's deliverable, and at what cost?<br>
+<strong>Benchmarked against another analyst's published project</strong> — the
+dataset, the question set and the dashboard are theirs, not mine. That repository
+carries no licence, so it is <strong>linked, never copied:</strong> fetch it from
+the source and my harness runs against the same input.<br>
+<strong>The success criterion was frozen before the first API call and bound to
+the run.</strong> The runner writes the pre-registration's commit hash into the run
+config, so <em>a run whose hash is not an ancestor of the reported results is not
+scored.</em><br>
+<strong>Not a validated benchmark.</strong> The dataset is public and
+third-party, the question set is someone else's, and <strong>the harness and the
+scorer are mine.</strong> Nobody independent validated this result.</td>
+<td><strong>Closed. 11 of 13</strong> objective questions, <strong>zero invented
+figures</strong> — 930,510 tokens, 12.8 minutes, 97,498 tickets.<br>
+And the part worth keeping over the score: <strong>a hypothesis of my own,
+registered in advance, was refuted by the data and published anyway.</strong></td>
 </tr>
 
 <tr>
@@ -362,8 +391,8 @@ negative tests that must go red.</td>
 </tr>
 
 <tr>
-<td>An agent reproduced <strong>11 of 13</strong> objective questions from a
-validated analyst deliverable, against a threshold frozen and committed
+<td>An agent reproduced <strong>11 of 13</strong> objective questions from
+another analyst's published deliverable, against a threshold frozen and committed
 <em>before</em> the first API call. 930,510 tokens, 12.8 minutes, 97,498 tickets.</td>
 <td><strong>Reproducible end to end, and none of it is mine to take credit for
 twice.</strong><br>
