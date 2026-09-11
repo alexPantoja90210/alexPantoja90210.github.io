@@ -171,7 +171,20 @@ frozen and committed before the first API call, with zero invented figures</td>
 
 <tr>
 <td><strong>RCA-with-context pilot</strong></td>
-<td>Does supplying metrics and a dependency graph improve root-cause analysis?</td>
+<td>Does supplying metrics and a dependency graph improve root-cause analysis?<br>
+<strong>Benchmarked against the open question Microsoft Research left at the end of
+its own paper.</strong> They fed a model only an incident's title and summary,
+across more than 40,000 incidents from over 1,000 services, and closed by asking:
+<em>"how can we incorporate additional context about the incident, such as
+discussion entries, logs, service metrics, and even dependency graphs of the
+impacted services to improve the diagnosis?"</em> I built a three-node chain on
+AWS to answer it with faults I injected myself.<br>
+<a href="https://www.microsoft.com/en-us/research/blog/large-language-models-for-automatic-cloud-incident-management/">Large
+language models for automatic cloud incident management</a> — Microsoft
+Research.<br>
+<strong>Not a replication.</strong> There is no 40,000-incident corpus here and
+none is claimed. Their contribution is scale; mine was a dependency a machine
+could not fake.</td>
 <td><strong>Stopped on evidence.</strong> No incident in the corpus required the
 graph, so the pilot could not test the thing it existed to test. Not delivered,
 and that is the recorded result rather than a silence</td>
