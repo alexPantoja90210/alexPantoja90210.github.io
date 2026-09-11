@@ -125,6 +125,63 @@ whether it shipped.</p>
 repositories below are public and every claim in this section is readable in
 them.</p>
 
+<p>The six, named — with the question each was built to answer. The one that was
+stopped is listed with the rest rather than left out.</p>
+
+<div class="scroll">
+<table>
+<tr><th>Product</th><th>The question it answers</th><th>Outcome</th></tr>
+
+<tr>
+<td><strong>AWS FinOps Guardian</strong></td>
+<td>How do you watch a live cloud account without the watcher being able to break
+it?</td>
+<td><strong>Closed.</strong> Read-only proven from inside the account:
+<strong>11/11 mutations denied, 0 inconclusive, 5/5 reads working</strong></td>
+</tr>
+
+<tr>
+<td><strong>FinOps Copilot</strong></td>
+<td>Where is the money going, and what do I fix first?</td>
+<td><strong>Closed.</strong> Caught two real bugs — and a third in my own quality
+gate, which had been passing everything</td>
+</tr>
+
+<tr>
+<td><strong>Ops Triage Copilot</strong></td>
+<td>Can an agent triage incidents without touching the infrastructure?</td>
+<td><strong>Closed.</strong> It proposes and never acts. A no-hallucination gate
+caught metric evidence emitted as free text, before delivery</td>
+</tr>
+
+<tr>
+<td><strong>Migration Planner</strong></td>
+<td>What moves, in what order, and what will it cost? And what do you compare a
+planning tool against?</td>
+<td><strong>Closed.</strong> Benchmarked against a real 100-server estate and the
+four-wave plan five IT teams drew for it</td>
+</tr>
+
+<tr>
+<td><strong>Agent-as-analyst</strong></td>
+<td>Can an agent reproduce an analyst deliverable, and at what cost?</td>
+<td><strong>Closed.</strong> 11 of 13 objective questions, against a threshold
+frozen and committed before the first API call, with zero invented figures</td>
+</tr>
+
+<tr>
+<td><strong>RCA-with-context pilot</strong></td>
+<td>Does supplying metrics and a dependency graph improve root-cause analysis?</td>
+<td><strong>Stopped on evidence.</strong> No incident in the corpus required the
+graph, so the pilot could not test the thing it existed to test. Not delivered,
+and that is the recorded result rather than a silence</td>
+</tr>
+</table>
+</div>
+
+<p>The engineering underneath them, by theme rather than by product — several of
+these are shared across more than one of the six.</p>
+
 <h3>Infrastructure and governance, in code</h3>
 <ul>
 <li>A full <strong>Terraform stack</strong> for a cloud-watching service, applied
@@ -359,7 +416,7 @@ done, and BPMN flows exist for the portfolio.</p>
 <a href="https://github.com/alexPantoja90210/aws-finops-guardian">aws-finops-guardian</a> ·
 <a href="https://github.com/alexPantoja90210/agentic-copilots">agentic-copilots</a></p>
 <p><span class="kv">Profile:</span>
-<a href="https://www.linkedin.com/in/alejandropantoja-itprojectmanager">linkedin.com/in/alejandropantoja-itprojectmanager</a></p>
+<a href="https://www.linkedin.com/in/alejandropantoja/">linkedin.com/in/alejandropantoja</a></p>
 <p>If something here does not check out, tell me and I will correct it. That has
 happened repeatedly and it is the point.</p>
 </div>
