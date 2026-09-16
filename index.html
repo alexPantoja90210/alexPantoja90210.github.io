@@ -456,8 +456,17 @@ runs against the same input.</td>
 <div class="warnbox">
 <p>Stated here so nobody has to discover it.</p>
 <ul>
-<li><strong>No USD figure for LLM cost.</strong> That price file is
-<code>verified: false</code>. Token counts are publishable; dollars are not.</li>
+<li><strong>LLM dollar figures, only for three models and only because the
+prices were fetched.</strong> This used to say no dollar figures at all, because
+the price file was <code>verified: false</code> and a cost quoted from memory is
+not a measurement. On 16 Sep 2026 the list was read from
+<a href="https://platform.claude.com/docs/en/about-claude/pricing">Anthropic's
+pricing page</a> and the date and source recorded, so the figures published for
+<strong>Haiku 4.5, Sonnet 5 and Opus 5 are cited, not remembered</strong>, and
+the token counts behind them come from the <code>usage</code> block the API
+returns rather than from an estimate. <strong>That file is still unverified for
+every other model and no dollar figure is offered for one.</strong> Fetching a
+price once is not a licence to quote prices.</li>
 <li><strong>The migration cost figure is a list-price upper bound, not a
 costing.</strong> Any organisation running an estate that size pays negotiated
 rates, lower by an amount I do not know and <strong>will not estimate</strong>.</li>
