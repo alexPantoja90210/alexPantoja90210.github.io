@@ -257,7 +257,7 @@ else.</td>
 
 <tr>
 <td><strong>Local grounded RAG</strong><br>
-<span class="chip">in progress · two slices of four</span></td>
+<span class="chip">in progress · three slices of four</span></td>
 <td>Can the same guarantees hold with no API key, no account, and no document
 leaving the laptop — and what does the industry's chunking rule of thumb
 actually cost?<br>
@@ -267,10 +267,12 @@ The other, when a file will not convert, <strong>stores the text of its own erro
 message as the document</strong> — chunked, embedded, retrievable, and the ingest
 reports success. Both are held together by a line of prompt telling the model to
 always search, with nothing enforcing it.</td>
-<td><strong>In progress, and it says so.</strong> Two slices of four are built and
-public: a contract that refuses a file whose extension lies about its bytes, and a
-chunker that packs to the embedding model's real token window and never truncates.
-<strong>160 invariants, seven mutations, no dependencies.</strong><br>
+<td><strong>In progress, and it says so.</strong> Three slices of four are built
+and public: a contract that refuses a file whose extension lies about its bytes, a
+chunker that packs to the embedding model's real token window and never truncates,
+and a store that <strong>refuses a query built by a different embedder</strong>
+rather than answering it plausibly.
+<strong>196 invariants, twelve mutations, no dependencies at all.</strong><br>
 <strong>The measured result.</strong> The 3.5-characters-per-token rule everyone
 uses was <strong>5.69 on this text, off by 63%</strong> — and off in the safe
 direction, which is why nothing ever failed. No error, no warning, no red test. It
@@ -278,8 +280,10 @@ simply left <strong>38% of the model's window unused</strong>, permanently. At t
 same retrieval depth that is <strong>1,575 tokens of context against 2,090</strong>:
 a third more, from the same documents.<br>
 <strong>The architecture was written before the first commit</strong>, with its
-unknowns listed and two predictions registered. That is new here: everything above
-was documented afterwards.</td>
+unknowns listed and two predictions registered, and it has since been corrected
+twice in public. Version two used Postgres; version three does not, and the page
+says why with the numbers rather than quietly losing it. That is new here:
+everything above was documented afterwards.</td>
 </tr>
 
 </table>
