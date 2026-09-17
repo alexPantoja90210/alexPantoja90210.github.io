@@ -109,12 +109,12 @@ whether it shipped.</p>
 </tr>
 
 <tr>
-  <td><span class="chip">2026 · Applied AI</span><br><strong>Seven products, built and shipped</strong><br>
+  <td><span class="chip">2026 · Applied AI</span><br><strong>Eight products, built and shipped</strong><br>
       Written to answer a question I could not answer by reading: can you tell
       whether an AI solution works, what it costs, and when to stop it?</td>
   <td>Independent</td>
-  <td>Seven products · six closed, one stopped on evidence · 62 defects raised and
-      tracked</td>
+  <td>Eight products · six closed, one stopped on evidence, one in progress ·
+      64 defects raised and tracked</td>
 </tr>
 </table>
 </div>
@@ -125,8 +125,9 @@ whether it shipped.</p>
 repositories below are public and every claim in this section is readable in
 them.</p>
 
-<p>The seven, named — with the question each was built to answer. The one that was
-stopped is listed with the rest rather than left out.</p>
+<p>The eight, named — with the question each was built to answer. The one that was
+stopped is listed with the rest rather than left out, and so is the one still
+being built.</p>
 
 <div class="scroll">
 <table>
@@ -254,11 +255,38 @@ in no accuracy number, and it is the one thing here I had not read anywhere
 else.</td>
 </tr>
 
+<tr>
+<td><strong>Local grounded RAG</strong><br>
+<span class="chip">in progress · two slices of four</span></td>
+<td>Can the same guarantees hold with no API key, no account, and no document
+leaving the laptop — and what does the industry's chunking rule of thumb
+actually cost?<br>
+<strong>Two more repositories audited before a line was written.</strong> One
+stops reading its corpus at the first record with fewer than ten fields, silently.
+The other, when a file will not convert, <strong>stores the text of its own error
+message as the document</strong> — chunked, embedded, retrievable, and the ingest
+reports success. Both are held together by a line of prompt telling the model to
+always search, with nothing enforcing it.</td>
+<td><strong>In progress, and it says so.</strong> Two slices of four are built and
+public: a contract that refuses a file whose extension lies about its bytes, and a
+chunker that packs to the embedding model's real token window and never truncates.
+<strong>160 invariants, seven mutations, no dependencies.</strong><br>
+<strong>The measured result.</strong> The 3.5-characters-per-token rule everyone
+uses was <strong>5.69 on this text, off by 63%</strong> — and off in the safe
+direction, which is why nothing ever failed. No error, no warning, no red test. It
+simply left <strong>38% of the model's window unused</strong>, permanently. At the
+same retrieval depth that is <strong>1,575 tokens of context against 2,090</strong>:
+a third more, from the same documents.<br>
+<strong>The architecture was written before the first commit</strong>, with its
+unknowns listed and two predictions registered. That is new here: everything above
+was documented afterwards.</td>
+</tr>
+
 </table>
 </div>
 
 <p>The engineering underneath them, by theme rather than by product — several of
-these are shared across more than one of the seven.</p>
+these are shared across more than one of the eight.</p>
 
 <h3>Infrastructure and governance, in code</h3>
 <ul>
@@ -353,10 +381,13 @@ authorization as passes.</td>
 
 <tr>
 <td><strong>The expensive defect is almost never in the model.</strong> In six of
-seven projects it was in the instrument I built to measure the model, or in the
+eight projects it was in the instrument I built to measure the model, or in the
 sentence describing it. In the seventh, all six defects were in what the
-interface told the person using it, and none were in the model or the retrieval.</td>
-<td><strong>62 defects raised and tracked</strong>, most caught before they could
+interface told the person using it, and none were in the model or the retrieval.
+The eighth hit the same class <em>on its first real run</em>: a report whose
+headline said nothing exceeded the model's limit, with a warning inside it saying
+something did. Both were true, and nothing explained which to believe.</td>
+<td><strong>64 defects raised and tracked</strong>, most caught before they could
 reach a published conclusion. Corrections that ran against my own interest were
 published anyway, including a hypothesis of mine the data refuted and a cause I
 diagnosed with confidence and got wrong.</td>
@@ -518,7 +549,8 @@ done, and BPMN flows exist for the portfolio.</p>
 <a href="https://github.com/alexPantoja90210/aws-migration-planner">aws-migration-planner</a> ·
 <a href="https://github.com/alexPantoja90210/aws-finops-guardian">aws-finops-guardian</a> ·
 <a href="https://github.com/alexPantoja90210/agentic-copilots">agentic-copilots</a> ·
-<a href="https://github.com/alexPantoja90210/rag-retrieval-lab">rag-retrieval-lab</a></p>
+<a href="https://github.com/alexPantoja90210/rag-retrieval-lab">rag-retrieval-lab</a> ·
+<a href="https://github.com/alexPantoja90210/local-rag-lab">local-rag-lab</a></p>
 <p><span class="kv">Profile:</span>
 <a href="https://www.linkedin.com/in/alejandropantoja/">linkedin.com/in/alejandropantoja</a></p>
 <p>If something here does not check out, tell me and I will correct it. That has
