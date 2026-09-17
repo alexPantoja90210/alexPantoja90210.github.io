@@ -113,8 +113,8 @@ whether it shipped.</p>
       Written to answer a question I could not answer by reading: can you tell
       whether an AI solution works, what it costs, and when to stop it?</td>
   <td>Independent</td>
-  <td>Eight products · six closed, one stopped on evidence, one in progress ·
-      64 defects raised and tracked</td>
+  <td>Eight products · seven closed, one stopped on evidence ·
+      70 defects raised and tracked</td>
 </tr>
 </table>
 </div>
@@ -257,7 +257,7 @@ else.</td>
 
 <tr>
 <td><strong>Local grounded RAG</strong><br>
-<span class="chip">in progress · three slices of four</span></td>
+<span class="chip">four slices of four</span></td>
 <td>Can the same guarantees hold with no API key, no account, and no document
 leaving the laptop — and what does the industry's chunking rule of thumb
 actually cost?<br>
@@ -267,21 +267,40 @@ The other, when a file will not convert, <strong>stores the text of its own erro
 message as the document</strong> — chunked, embedded, retrievable, and the ingest
 reports success. Both are held together by a line of prompt telling the model to
 always search, with nothing enforcing it.</td>
-<td><strong>In progress, and it says so.</strong> Three slices of four are built
-and public: a contract that refuses a file whose extension lies about its bytes, a
-chunker that packs to the embedding model's real token window and never truncates,
-and a store that <strong>refuses a query built by a different embedder</strong>
-rather than answering it plausibly.
-<strong>196 invariants, twelve mutations, no dependencies at all.</strong><br>
+<td><strong>Four slices of four, running on one laptop.</strong> A contract that
+refuses a file whose extension lies about its bytes, a chunker that packs to the
+embedding model's real token window and never truncates, a store that
+<strong>refuses a query built by a different embedder</strong> rather than
+answering it plausibly, and a citation gate that <strong>discards generated text
+citing anything the model was not shown</strong> — including a real passage from
+the same corpus that simply was not supplied on that turn, which is
+indistinguishable from a correct answer by eye.
+<strong>329 invariants, 19 of them controls, 28 mutations, no dependencies at
+all.</strong><br>
 <strong>The measured result.</strong> The 3.5-characters-per-token rule everyone
 uses was <strong>5.69 on this text, off by 63%</strong> — and off in the safe
 direction, which is why nothing ever failed. No error, no warning, no red test. It
 simply left <strong>38% of the model's window unused</strong>, permanently. At the
 same retrieval depth that is <strong>1,575 tokens of context against 2,090</strong>:
 a third more, from the same documents.<br>
+<strong>The second measured result, from a control run looking for something
+else.</strong> Given no search tool, no passages and no corpus at all, the model
+answered <i>"According to the NeuralFlow AI Knowledge Base, ..."</i> — attributing
+its answer by name to a source it had never read. Not a wrong fact, which is
+ordinary, but the manufactured <strong>appearance</strong> of being grounded, which
+is the failure that survives review because it looks like diligence. No instruction
+prevents that sentence. The gate discards it.<br>
+<strong>And a prediction that did not hold.</strong> It was registered before the
+run: that the agent would skip retrieval on questions it believed it already knew.
+It never skipped, not once in twelve turns. Published as written — and only
+published at all after a control proved the detector could have said otherwise,
+because zero is the one number a broken instrument and a working one both
+produce.<br>
 <strong>The architecture was written before the first commit</strong>, with its
 unknowns listed and two predictions registered, and it has since been corrected
-twice in public. Version two used Postgres; version three does not, and the page
+three times in public. Version two used Postgres; version three does not; version
+four carries the rule that a status row with no commit hash beside it cannot say
+Done, because three of its rows sat a day behind the code they described. The page
 says why with the numbers rather than quietly losing it. That is new here:
 everything above was documented afterwards.</td>
 </tr>
@@ -391,7 +410,7 @@ interface told the person using it, and none were in the model or the retrieval.
 The eighth hit the same class <em>on its first real run</em>: a report whose
 headline said nothing exceeded the model's limit, with a warning inside it saying
 something did. Both were true, and nothing explained which to believe.</td>
-<td><strong>64 defects raised and tracked</strong>, most caught before they could
+<td><strong>70 defects raised and tracked</strong>, most caught before they could
 reach a published conclusion. Corrections that ran against my own interest were
 published anyway, including a hypothesis of mine the data refuted and a cause I
 diagnosed with confidence and got wrong.</td>
@@ -560,7 +579,7 @@ done, and BPMN flows exist for the portfolio.</p>
 <p>If something here does not check out, tell me and I will correct it. That has
 happened repeatedly and it is the point.</p>
 <p><span class="kv">Last updated:</span> 17 September 2026 &middot; eight products,
-64 defects. <span class="kv">The rule for this line:</span> it moves in the same
+70 defects. <span class="kv">The rule for this line:</span> it moves in the same
 commit as whatever it describes. A date that lags the page is a claim the page
 cannot support, which is the defect most of the work above is about.</p>
 </div>
