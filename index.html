@@ -109,12 +109,12 @@ whether it shipped.</p>
 </tr>
 
 <tr>
-  <td><span class="chip">2026 · Applied AI</span><br><strong>Nine products, built and shipped</strong><br>
+  <td><span class="chip">2026 · Applied AI</span><br><strong>Ten products, built and shipped</strong><br>
       Written to answer a question I could not answer by reading: can you tell
       whether an AI solution works, what it costs, and when to stop it?</td>
   <td>Independent</td>
-  <td>Nine products · eight closed, one stopped on evidence ·
-      104 defects raised and tracked</td>
+  <td>Ten products · nine closed, one stopped on evidence ·
+      105 defects raised and tracked</td>
 </tr>
 </table>
 </div>
@@ -125,7 +125,7 @@ whether it shipped.</p>
 repositories below are public and every claim in this section is readable in
 them.</p>
 
-<p>The nine, named — with the question each was built to answer. The one that was
+<p>The ten, named — with the question each was built to answer. The one that was
 stopped is listed with the rest rather than left out, and so is the one still
 being built.</p>
 
@@ -359,11 +359,47 @@ BM25 would lose at k=5, since the published table falls from 88.12 to 86.43 ther
 It gained on all three models. It stays in the repository because it was wrong.</td>
 </tr>
 
+<tr>
+<td><strong>Contract clause sheet</strong><br>
+<span class="chip">eight clauses, no model</span><br>
+<span class="chip">IA-225</span></td>
+<td>Can a contract be read into a sheet somebody can check — and which clauses is
+that honest for?<br>
+The second half of that question is the one most of this kind of work skips.</td>
+<td><strong>Closed.</strong> Plain text in, <strong>eight clauses out</strong>: what
+each says, which are missing, and a confidence on every row. <strong>No model, no
+API key, no database, no network</strong> — the Python standard library and under a
+second per contract.<br>
+<strong>Measured on 101 contracts it had never seen</strong>, the held-out split of
+CUAD's 510 attorney-annotated commercial contracts, over 950 judgeable rows:
+<strong>76.3% of rows correct, +30 points over the naive parse that comes
+free</strong>, 47% of sheets at 80% or better, and 16% with no error at all.<br>
+<strong>Why eight and not CUAD's forty-one — which is the result, not an
+apology.</strong> Before anything was built, <code>trivial_floor.py</code> computed
+what a system scores by always answering the majority class. Across the 33
+presence categories that is <strong>79.7%</strong>: a detector that reads nothing,
+answers "not present" every time, and beats an accuracy averaged over all 41.
+<strong>A metric a constant answer can win was never going to separate a good
+clause sheet from a bad one</strong>, so it was abandoned rather than reported, and
+the scope was cut to the clauses where a number means something. The cut is in
+<code>scope.py</code> and was written before any output existed. A category without
+enough positives to calibrate is not published at all — it is marked uncalibratable
+and routed to a human.<br>
+<strong>Two measurement rules worth naming.</strong> The split is by contract and
+never by question: every contract is asked all 41, so splitting questions at random
+would put the same text on both sides of the line. And term ties break on the term
+itself, because Python randomises string hashing per process — without that the
+cutoff lands somewhere different on every run and <em>the project prints a different
+number each time it is asked.</em><br>
+Also carries a NIST AI RMF mapping, a risk register and a trustworthiness
+assessment.</td>
+</tr>
+
 </table>
 </div>
 
 <p>The engineering underneath them, by theme rather than by product — several of
-these are shared across more than one of the nine.</p>
+these are shared across more than one of the ten.</p>
 
 <h3>Infrastructure and governance, in code</h3>
 <ul>
@@ -629,6 +665,13 @@ two designs agree — and that is the only row comparable to the published figur
 There this lands at <strong>96.98 against 97.45: below it.</strong> At k=5 and k=10
 the larger pool flatters this harness, which was written down before the runs rather
 than after reading them.</li>
+<li><strong>The clause sheet's 76.3% and the 79.7% floor are not the same
+measurement, and must not be read against each other.</strong> The 76.3% is rows
+correct over the <strong>eight published clauses</strong>; the 79.7% is the
+majority-class floor across the <strong>33 presence categories</strong> and belongs
+to the metric that was abandoned because of it. Putting them on one axis would say
+the sheet loses to a system that reads nothing, which is not what was measured. The
+finding is about the metric, not about the sheet's own number.</li>
 <li><strong>Nothing about the retrieval result generalises.</strong> One corpus of
 source code, one model writing the context, one reranker, three embedders, 248
 queries. The direction holds at three values of k and across three models, which is
@@ -663,13 +706,14 @@ done, and BPMN flows exist for the portfolio.</p>
 <a href="https://github.com/alexPantoja90210/agentic-copilots">agentic-copilots</a> ·
 <a href="https://github.com/alexPantoja90210/rag-retrieval-lab">rag-retrieval-lab</a> ·
 <a href="https://github.com/alexPantoja90210/local-rag-lab">local-rag-lab</a> &middot;
-<a href="https://github.com/alexPantoja90210/contextual-retrieval-reproduction">contextual-retrieval-reproduction</a></p>
+<a href="https://github.com/alexPantoja90210/contextual-retrieval-reproduction">contextual-retrieval-reproduction</a> &middot;
+<a href="https://github.com/alexPantoja90210/ficha-contratos">ficha-contratos</a></p>
 <p><span class="kv">Profile:</span>
 <a href="https://www.linkedin.com/in/alejandropantoja/">linkedin.com/in/alejandropantoja</a></p>
 <p>If something here does not check out, tell me and I will correct it. That has
 happened repeatedly and it is the point.</p>
-<p><span class="kv">Last updated:</span> 2 October 2026 &middot; nine products
-&middot; <strong>104 defects in the Jira register, read 2 Oct 21:58</strong>.
+<p><span class="kv">Last updated:</span> 2 October 2026 &middot; ten products
+&middot; <strong>105 defects in the Jira register, read 2 Oct 22:15</strong>.
 <span class="kv">The rule for this line:</span> it moves in the same commit as
 whatever it describes, and the defect count names when it was read. Earlier today
 this line said 70 and was correct for about an hour, because the register moves
