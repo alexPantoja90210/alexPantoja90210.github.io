@@ -109,12 +109,12 @@ whether it shipped.</p>
 </tr>
 
 <tr>
-  <td><span class="chip">2026 · Applied AI</span><br><strong>Eight products, built and shipped</strong><br>
+  <td><span class="chip">2026 · Applied AI</span><br><strong>Nine products, built and shipped</strong><br>
       Written to answer a question I could not answer by reading: can you tell
       whether an AI solution works, what it costs, and when to stop it?</td>
   <td>Independent</td>
-  <td>Eight products · seven closed, one stopped on evidence ·
-      73 defects raised and tracked</td>
+  <td>Nine products · eight closed, one stopped on evidence ·
+      96 defects raised and tracked</td>
 </tr>
 </table>
 </div>
@@ -125,7 +125,7 @@ whether it shipped.</p>
 repositories below are public and every claim in this section is readable in
 them.</p>
 
-<p>The eight, named — with the question each was built to answer. The one that was
+<p>The nine, named — with the question each was built to answer. The one that was
 stopped is listed with the rest rather than left out, and so is the one still
 being built.</p>
 
@@ -311,11 +311,58 @@ says why with the numbers rather than quietly losing it. That is new here:
 everything above was documented afterwards.</td>
 </tr>
 
+<tr>
+<td><strong>Contextual retrieval, reproduced then taken past the paper</strong><br>
+<span class="chip">three embedders, four stages</span></td>
+<td>Does a published retrieval result survive changing the one thing the
+publication held fixed?<br>
+Anthropic published contextual retrieval measured on a single embedding model.
+Whether the gain belongs to the technique or to that model is not something the
+publication answers, and I could not find a published answer anywhere.</td>
+<td><strong>Closed.</strong> The reproduction came first and is what makes the
+rest readable: the baseline landed on the published figures to the hundredth —
+<strong>80.918779 / 87.149578 / 90.063364</strong> against a published
+<strong>80.92 / 87.15 / 90.06</strong>. Embeddings are deterministic, so an
+unchanged method on unchanged data has exactly one answer and landing on it is
+evidence the measured path was not altered.<br>
+Then the instrument was pointed at the open question: <strong>three embedding
+models through four stages each</strong> — plain chunks, contextual chunks, a BM25
+ranking fused in, and a cross-encoder rerank — on the same 737 chunks, the same
+contextualised text byte for byte, the same 248 queries and the same scoring.<br>
+<strong>The three converge, and then they stop differing at all.</strong> The
+spread between them at k=5 runs <strong>7.11 points on plain chunks, 1.34 after
+contextual, 0.45 after fusion, and 0.00 after reranking</strong> — all three land
+on <strong>92.45 / 95.50 / 96.98</strong>, identical to every decimal the scoring
+produces, at every k.<br>
+<strong>Not a coincidence and not one ranking reused.</strong> Each model paid for
+its own 246 reranking calls over its own candidates and the caches share no entry.
+The cause is measured rather than asserted: each pool of 200 holds the correct
+chunk <strong>99.43% to 99.70%</strong> of the time while the three pools share as
+little as <strong>55%</strong> of their contents. Genuinely different sets that
+agree on the handful that matters, and a cross-encoder scores each pair without
+reference to the order it arrived in.<br>
+<strong>The decision that falls out of it.</strong> The model with the best score
+on plain chunks had the worst after both techniques, and none after all four. A
+benchmark that ranks embedding models on plain chunks ranked these three in the
+opposite order from the system anyone would ship.<br>
+<strong>And a defect in my own harness, measured instead of argued.</strong> It had
+been placing the generated context after the chunk where the guide places it
+before. Rather than quietly correcting it after the numbers were published, a probe
+re-embedded the same text in the guide's order: worth <strong>+0.81 at k=5</strong>,
+<strong>+0.60 at k=10</strong> and <strong>−0.10 at k=20</strong> — the same size
+as the gap between this harness and the published contextual figure, which makes it
+a plausible explanation for that gap and not a demonstrated one. Left as written so
+every column stays comparable, and stated in the results file.<br>
+<strong>One prediction registered before the runs, and wrong.</strong> That fusing
+BM25 would lose at k=5, since the published table falls from 88.12 to 86.43 there.
+It gained on all three models. It stays in the repository because it was wrong.</td>
+</tr>
+
 </table>
 </div>
 
 <p>The engineering underneath them, by theme rather than by product — several of
-these are shared across more than one of the eight.</p>
+these are shared across more than one of the nine.</p>
 
 <h3>Infrastructure and governance, in code</h3>
 <ul>
@@ -438,8 +485,25 @@ the experiment that would test it is scoped and has not been run.</td>
 <td>Stated as open on purpose. Calling it a finding would be the exact defect this
 portfolio catalogues.</td>
 </tr>
+
+<tr>
+<td><strong>Past a certain retrieval depth, the retriever's only job is to not
+lose the answer.</strong> Three embedding models spanning 7.11 points of Pass@5 on
+plain chunks finish on the same number — to every decimal, at every k — once a
+cross-encoder reranks 200 candidates. The choice between them, which the plain
+benchmark makes look like the decision, turns out to be worth nothing.</td>
+<td>Each model's 200-candidate pool holds the correct chunk 99.43% to 99.70% of the
+time, while the pools overlap as little as 55%. Different sets, same few chunks
+that matter, and a cross-encoder that scores each pair on its own merits. The
+measurement is in the repository and recomputes from the stored vectors with no
+account anywhere. <strong>And the shape that would have been a finding, discarded:
+the weaker model closes the larger share of its remaining error here too, but with
+an identical endpoint that is arithmetic rather than evidence</strong> — in the two
+earlier stages the endpoints differed and the ordering was not forced.</td>
+</tr>
 </table>
 </div>
+
 
 <h2>Claim → what stands behind it</h2>
 
@@ -551,6 +615,24 @@ The 108-of-108 result is the robust one because it rests on 108 observations.</l
 answerable and unanswerable questions better than the top score does, 0.800
 against 0.733 across 90 pairs. <em>Two questions falling the other way would
 erase that.</em> It is worth testing properly and it is not a result.</li>
+<li><strong>Two of the four retrieval rows are not reproductions, and say so in
+their own first paragraphs.</strong> The published keyword row runs on
+Elasticsearch; mine is a local BM25 written to Lucene's formula, which closes three
+differences that would otherwise have nothing to do with the question and leaves one
+it cannot — Lucene stores field length in a single byte and this does not. The
+reranking row uses a fixed pool of 200 candidates at every k where the published
+design sizes the pool to k, because that is one API call per query instead of three
+and the free allowance is 1,000 a month against the published design's 2,232.
+<strong>The deviation shrinks as k grows and disappears at k=20</strong>, where the
+two designs agree — and that is the only row comparable to the published figure.
+There this lands at <strong>96.98 against 97.45: below it.</strong> At k=5 and k=10
+the larger pool flatters this harness, which was written down before the runs rather
+than after reading them.</li>
+<li><strong>Nothing about the retrieval result generalises.</strong> One corpus of
+source code, one model writing the context, one reranker, three embedders, 248
+queries. The direction holds at three values of k and across three models, which is
+not the same as being general, and says nothing about prose, a larger corpus, or an
+embedding model stronger than the three measured.</li>
 <li><strong>None of it makes a model forget.</strong> The knowledge is in the
 weights. What is built here makes using it without support detectable and
 refusable. Detection and incentive, not amnesia — anyone offering the second is
@@ -579,13 +661,14 @@ done, and BPMN flows exist for the portfolio.</p>
 <a href="https://github.com/alexPantoja90210/aws-finops-guardian">aws-finops-guardian</a> ·
 <a href="https://github.com/alexPantoja90210/agentic-copilots">agentic-copilots</a> ·
 <a href="https://github.com/alexPantoja90210/rag-retrieval-lab">rag-retrieval-lab</a> ·
-<a href="https://github.com/alexPantoja90210/local-rag-lab">local-rag-lab</a></p>
+<a href="https://github.com/alexPantoja90210/local-rag-lab">local-rag-lab</a> &middot;
+<a href="https://github.com/alexPantoja90210/contextual-retrieval-reproduction">contextual-retrieval-reproduction</a></p>
 <p><span class="kv">Profile:</span>
 <a href="https://www.linkedin.com/in/alejandropantoja/">linkedin.com/in/alejandropantoja</a></p>
 <p>If something here does not check out, tell me and I will correct it. That has
 happened repeatedly and it is the point.</p>
-<p><span class="kv">Last updated:</span> 17 September 2026 &middot; eight products
-&middot; <strong>73 defects in the Jira register, read 17 Sep 12:30</strong>.
+<p><span class="kv">Last updated:</span> 2 October 2026 &middot; nine products
+&middot; <strong>96 defects in the Jira register, read 2 Oct 21:40</strong>.
 <span class="kv">The rule for this line:</span> it moves in the same commit as
 whatever it describes, and the defect count names when it was read. Earlier today
 this line said 70 and was correct for about an hour, because the register moves
